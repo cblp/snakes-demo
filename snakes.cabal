@@ -1,0 +1,84 @@
+name:                snakes
+version:             0.1.0.0
+synopsis:            Game of Snakes
+description:         Please see README.md
+homepage:            https://github.com/Gradet/game-Snakes#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Gorlov Timofey
+maintainer:          gorlov.timofey@gmail.com
+copyright:           2018 Gorlov Tiomofey
+category:            Games
+build-type:          Simple
+-- extra-source-files:
+cabal-version:       >=1.10
+
+library
+  ghc-options:  -Wall -Wno-type-defaults
+  hs-source-dirs:      src
+  exposed-modules:
+    Snakes
+    Snakes.Bot
+    Snakes.Config
+    Snakes.Control
+    Snakes.Model
+    Snakes.Model.Effect
+    Snakes.Model.Item
+    Snakes.Model.Snake
+    Snakes.Model.Universe
+    Snakes.Render
+  build-depends:       base >= 4.7 && < 5
+                     , binary
+                     , containers
+                     , gloss
+                     , MonadRandom
+                     , random
+                     , stm
+                     , websockets
+  default-language:    Haskell2010
+
+executable snakes
+  hs-source-dirs:      app
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , gloss
+                     , MonadRandom
+                     , snakes
+                     , stm
+  default-language:    Haskell2010
+
+executable snakes-client
+  hs-source-dirs:      client
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , snakes
+                     , gloss
+                     , stm
+                     , websockets
+  default-language:    Haskell2010
+
+executable snakes-server
+  hs-source-dirs:      server
+  main-is:             Main.hs
+  other-modules:
+    Snakes.Server
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , containers
+                     , http-types
+                     , MonadRandom
+                     , servant
+                     , servant-server
+                     , snakes
+                     , stm
+                     , wai
+                     , wai-websockets
+                     , warp
+                     , websockets
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/Gradet/game-Snakes
